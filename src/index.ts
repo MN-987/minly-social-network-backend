@@ -1,6 +1,6 @@
 
 import express from 'express'
-import bootstrap from './routes/index.router'
+import bootstrap from './routes/index.routes'
 
 import dotenv from 'dotenv'
 dotenv.config()

@@ -12,7 +12,7 @@ export const asyncHandler = (fn) => {
 
 
 
-export const globalErrorHandling = (error, req, res, next) => {
+export const globalErrorHandling= (error, req, res, next) => {
     if(error){
         if(process.env.MOOD == 'DEV'){
             return res.status(error.status || 400).json({
@@ -24,3 +24,5 @@ export const globalErrorHandling = (error, req, res, next) => {
             }
         }
 }
+
+export { ErrorClass }
