@@ -4,11 +4,8 @@
   "description": "A Backend providing social network apis",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && npx tsc",
-    "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "preserve": "npm run build",
-    "serve": "concurrently \"npx tsc -w\"  \"nodemon dist/index.js\""
+    "build": "npm install && tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
