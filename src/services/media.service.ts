@@ -21,7 +21,7 @@ export const getAllMedia = async () => {
     })
     .select("-email -password -__v -__v -createdAt");
 
-  return { mediaObj };
+  return mediaObj;
   };
 
 export const getAllMediaPaginate = async (page:number,pageSize:number) => {

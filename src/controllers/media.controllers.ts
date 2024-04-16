@@ -41,7 +41,7 @@ export const delDeleteMedia = async (req: Request, res: Response) => {
 
 export const getAllMedia = async (req: Request, res: Response) => {
   const media = await mediaService.getAllMedia();
-  return res.status(200).json({ message: "All Media", data: media });
+  return res.status(200).json({ message: "All Media", data: media});
 };
 
 // export const getAllMediaPaginated = async (req: Request, res: Response) => {
