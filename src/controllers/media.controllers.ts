@@ -5,13 +5,21 @@ import { Request, Response } from "express";
 import * as mediaService from "../services/media.service";
 import { upload } from "../config/multer.config";
 
-export const postUploadMedia = async (req: Request, res: Response, next) => {
-  // for now It is user Id but it will be token based
-  const { uploaderUserId } = req.body;
+ 
 
+export const postUploadMedia = async (req: Request, res: Response, next) => {
+  // for now It is user Id but it will be token based in future
+  const { uploaderUserId } = req.body;
+  console.log("req.file", req.file);  
+
+  if(req.file.mimetype=== 'video/mp4'){
+    console.log("video file")
+  }
+  
   const uploadedMedia = await cloudinary.uploader.upload(req.file.path, {
+    resource_type: req.file.mimetype==='video/mp4' ? "video": "auto",
     upload_preset: "unsigned_upload",
-    allowed_formats: ["png", "mp4", "jpeg", "jpg", "gif", "mov"],
+    allowed_formats: ["png", "mp4", "jpeg", "jpg", "gif","heic"],
   });
   const result = await mediaService.createMedia(uploadedMedia, uploaderUserId);
 
@@ -32,12 +40,21 @@ export const delDeleteMedia = async (req: Request, res: Response) => {
 };
 
 export const getAllMedia = async (req: Request, res: Response) => {
-  const page = parseInt(req.query.page) || 1;
-  const pageSize = parseInt(req.query.pageSize) || 3;
-  const media = await mediaService.getAllMedia(page, pageSize);
-  
+  const media = await mediaService.getAllMedia();
   return res.status(200).json({ message: "All Media", data: media });
 };
+
+// export const getAllMediaPaginated = async (req: Request, res: Response) => {
+//   console.log("================")
+//   console.log("entered")
+// console.log("req.query",req.query)
+//   const page = parseInt(req.query.page) || 1;
+//   const pageSize = parseInt(req.query.pageSize) || 3;
+//   console.log(   "page is" , page , "pageSize is" ,pageSize) 
+//   const media = await mediaService.getAllMedia(page, pageSize);
+  
+//   return res.status(200).json({ message: "All Media", data: media });
+// };
 
 export const postLikeMedia = async (req: Request, res: Response) => {
   const { mediaId, userId } = req.body;
