@@ -1,2 +1,182 @@
-# minly-social-network-backend
- A Backend providing social network apis 
+# minly social network backend 
+
+
+## Description
+
+This project is a TypeScript Node.js application designed to serve a post feed . The backend relies on MongoDB as its database to efficiently store and manage user-generated content. Key features include seamless image and video  upload, as well as the ability to like and unlike videos and images.
+
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Folder Structure](#folder-structure)
+- [API Documentation](#api-documentation)
+- [Contribution](#contribution)
+- [License](#license)
+
+## Installation
+Instructions for installing and setting up the project.
+1. Clone the repository: `git clone  https://github.com/MN-987/minly-social-network-backend.git`
+2. Navigate to the project directory: `cd yourproject`
+3. Install dependencies: `npm install`
+4. Build and Run project `npm run serve` 
+
+## Usage
+Instructions for using the project, including examples.
+- in order to run the backend server successfully you have to provide some
+environment variables, see the `.env.example` file, copy it to a `.env` file,
+then update the variables in the `.env` file.
+
+## Environment Variables
+
+This project uses the following environment variables:
+
+- `PORT`: Specify the port number you want the server to listen to.
+
+- `CLOUD_NAME`: Your Cloudinary cloud name, required for accessing your Cloudinary account and managing media assets.
+
+- `API_KEY`: Your Cloudinary API key, used for authentication and authorization when interacting with the Cloudinary API.
+
+- `API_SECRET`: Your Cloudinary API secret, serving as the private key for securely signing API requests and ensuring data integrity.
+
+### Obtaining Cloudinary Keys
+
+To obtain your Cloudinary keys:
+
+1. Sign in to your Cloudinary account at [cloudinary.com](https://cloudinary.com/).
+2. Navigate to the dashboard or settings section of your Cloudinary account.
+3. Locate the section for API keys or integration settings.
+4. Generate or retrieve your Cloudinary cloud name, API key, and API secret.
+5. Copy these keys and paste them into the corresponding environment variables in your project's configuration file or deployment environment.
+
+By setting up these environment variables with your Cloudinary keys,   Node.js application will be able to securely communicate with the Cloudinary platform for managing media assets.
+
+
+- To start the project, run: `npm run serve`
+- Open your web browser and go to: `http://localhost:5000`
+
+ 
+## Folder Structure 
+
+
+A quick look at the top-level files and directories:
+
+```sh
+.
+├── config
+├── controllers
+├── middlewares
+├── models
+├── routes
+├── services
+├── types
+├── utils
+└── app.js
+```
+## Directory Explanations
+
+1. **config**: Contains any configuration files for the project, including settings related to databases, third-party services like cloudnary etc.
+
+2. **controllers**: Houses controller files responsible for handling incoming requests, processing data, and sending responses.
+
+3. **middlewares**: Holds middleware functions that have access to request and response objects in the Express application's request-response cycle.
+
+4. **models**: Contains files defining the application's data models, representing the structure of data stored in the database.
+
+5. **routes**: Defines API endpoints or routes of the application. Each route file corresponds to a specific feature, defining HTTP methods and handlers. Note: `index.routes.js` contains a bootstrap function to register middleware and routes.
+
+6. **services**: Encapsulates the application's business logic, responsible for performing specific tasks or operations on the database . 
+
+7. **types**: May contain TypeScript type definitions or interfaces used within the project, enhancing type safety and tooling support.
+
+8. **utils**: Contains utility functions or helper modules providing common functionality used throughout the application.
+
+9. **app.js**: Entry point of the application, initializing the Express application, setting up middleware, defining routes, connecting to the database, and starting the server.
+ 
+### API Endpoints
+
+<details>
+ <summary><b>Meida</b></summary>
+ 
+#### GET /api/v1/media
+
+> ##### Response Body Props:
+
+- **_id**: string (unique identifier)
+- **uploaderUserId**: object
+  - **_id**: string (user's unique identifier)
+  - **firstName**: string (user's first name)
+  - **lastName**: string (user's last name)
+- **mediaType**: string (type of media: "image" or "video")
+- **mediaUrl**: string (URL of the media file)
+- **likes**: object
+  - **count**: number (total number of likes)
+  - **usersLiked**: array (IDs of users who liked the media item)
+
+#### Response Body Example:
+
+```json
+{
+  "message": "All Media",
+  "data": [
+    {
+      "_id": "6614d3a34fefb6b4e06093",
+      "uploaderUserId": {
+        "_id": "6611719d1964977204709e",
+        "firstName": "Mostafa",
+        "lastName": "Nasser"
+      },
+      "mediaType": "image",
+      "mediaUrl": "link_TO_CLOUDANIRY_MEDIA",
+      "likes": {
+        "count": 1,
+        "usersLiked": []
+      }
+    },
+  
+  ]
+}
+```
+#### POST /api/v1/media
+
+> ##### Request Body Props:
+> - **file**: file (required) - The media file to be uploaded.
+> - **uploaderUserId**: string (required) - The ID of the user uploading the media.
+
+This endpoint allows users to upload media files.
+
+#### Request Body Example:
+
+This endpoint expects the request body to be in the form-data format you can use post man to make the request . You should include two fields:
+1. **file**: The media file to be uploaded.
+2. **uploaderUserId**: The ID of the user uploading the media.
+
+Below is an example of how to make a request using form-data:
+
+```plaintext
+file: <media_file>
+uploaderUserId: <user_id>
+```
+
+
+#### Response body :
+
+``` json
+{
+    "message": "Media uploaded successfully",
+    "data": {
+        "uploaderUserId": "6611719d19649772047095be",
+        "mediaType": "image",
+        "mediaUrl": "https://res.cloudinary.com/dojxtkgxk/image/upload/v1713295149/users_uploads/dbql9hmron2naiqgvg4f.png",
+        "likes": {
+            "count": 0,
+            "usersLiked": []
+        },
+        "mediaId": "users_uploads/dbql9dhmron2naiaqgvg4f",
+        "_id": "661ecf2f27b4525a74d59b09",
+        "createdAt": "2024-04-16T19:19:11.179Z",
+        "__v": 0
+    }
+}
+``` 
+</details>
