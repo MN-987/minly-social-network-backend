@@ -96,7 +96,7 @@ A quick look at the top-level files and directories:
 ### API Endpoints
 
 <details>
- <summary><b>auth</b></summary>
+ <summary><b>Media</b></summary>
  
 #### GET /api/v1/media
 
