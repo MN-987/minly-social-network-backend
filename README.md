@@ -96,7 +96,7 @@ A quick look at the top-level files and directories:
 ### API Endpoints
 
 <details>
- <summary><b>Meida</b></summary>
+ <summary><b>auth</b></summary>
  
 #### GET /api/v1/media
 
@@ -173,10 +173,227 @@ uploaderUserId: <user_id>
             "usersLiked": []
         },
         "mediaId": "users_uploads/dbql9dhmron2naiaqgvg4f",
-        "_id": "661ecf2f27b4525a74d59b09",
+        "_id": "661ecf2f27b452b09",
         "createdAt": "2024-04-16T19:19:11.179Z",
         "__v": 0
     }
 }
 ``` 
+
+
+#### POST /api/v1/media/like
+
+> ##### Request Body Props:
+>
+> - **mediaId**: string (required) - The ID of the media item to be liked.
+> - **userId**: string (required) - The ID of the user liking the media item.
+
+This endpoint allows users to like a specific media item.
+
+#### Request Body Example:
+
+```json
+{
+    "mediaId": "63b6b4e09ff3",
+    "userId": "6614d38809ff3"
+}
+
+```
+> Replace "mediaId" with the ID of the media item you want to like, and "userId" with the ID of the user performing the like action.
+ 
+#### Response Example
+
+```json
+{
+    "message": "Media liked successfully",
+    "data": {
+        "likes": {
+            "count": 2,
+            "usersLiked": [
+                "6611719d1964995be"
+            ]
+        },
+        "_id": "6614d4e0609ff3",
+        "uploaderUserId": "6619d19649772047095be",
+        "mediaType": "image",
+        "mediaUrl": "https://res.cloudinary.com/your_cloudaniry_key/image/upload/v1712640931/users_uploads/image_id.jpg",
+        "mediaId": "users_uploads/m8hmvolopofjzog",
+        "createdAt": "2024-04-09T05:35:31.952Z",
+        "__v": 0
+    }
+}
+```
+The response includes a message indicating the success of the like action and details about the media item in the `data` object. Properties include:
+
+- **likes**: Information about likes for the media item.
+- **_id**: The unique identifier of the media item.
+- **uploaderUserId**: The ID of the user who uploaded the media.
+- **mediaType**: The type of media (e.g., "image" or "video").
+- **mediaUrl**: The URL of the media file.
+- **mediaId**: The ID of the media item.
+- **createdAt**: The timestamp indicating when the media item was created.
+- **__v**: Version key used by Mongoose for schema versioning.
+
+#### POST /api/v1/media/un-like
+
+> ##### Request Body Props:
+>
+> - **mediaId**: string (required) - The ID of the media item to be unliked.
+> - **userId**: string (required) - The ID of the user unliking the media item.
+
+This endpoint allows users to unlike a previously liked media item.
+
+#### Request Body Example:
+
+```json
+{
+    "mediaId": "6614d3a34fefb6b4e0609ff3",
+    "userId": "6611719d19649772047095be"
+}
+
+#### POST /api/v1/media/un-like
+
+> ##### Request Body Props:
+>
+> - **mediaId**: string (required) - The ID of the media item to be unliked.
+> - **userId**: string (required) - The ID of the user unliking the media item.
+
+This endpoint allows users to unlike a previously liked media item.
+
+#### Request Body Example:
+
+```json
+{
+    "mediaId": "6614d3a34fefb6b4e0609ff3",
+    "userId": "6611719d19649772047095be"
+}
+
+
+> Replace "mediaId" with the ID of the media item you want to unlike, and "userId" with the ID of the user performing the unlike action.
+
+#### Response Example
+
+```json
+
+{
+    "message": "Media unliked successfully",
+    "data": {
+        "likes": {
+            "count": 1,
+            "usersLiked": []
+        },
+        "_id": "6614d3a34fefb6b4e0609ff3",
+        "uploaderUserId": "6611719d19649772047095be",
+        "mediaType": "image",
+        "mediaUrl": "https://res.cloudinary.com/dojxtkgxk/image/upload/v1712640931/users_uploads/m8hmvoy8qj2lopofjzog.jpg",
+        "mediaId": "users_uploads/m8hmvoy8qj2lopofjzog",
+        "createdAt": "2024-04-09T05:35:31.952Z",
+        "__v": 0
+    }
+}
+```
+
+The response includes a message indicating the success of the unlike action and details about the media item in the `data` object. Properties include:
+
+- **likes**: Information about likes for the media item.
+- **_id**: The unique identifier of the media item.
+- **uploaderUserId**: The ID of the user who uploaded the media.
+- **mediaType**: The type of media (e.g., "image" or "video").
+- **mediaUrl**: The URL of the media file.
+- **mediaId**: The ID of the media item.
+- **createdAt**: The timestamp indicating when the media item was created.
+- **__v**: Version key used by Mongoose for schema versioning.
+
+</details>
+
+<details>
+ <summary><b>Authentication and Registration</b></summary>
+
+ #### POST /api/v1/auth/register
+
+> ##### Request Body Props:
+>
+> - **firstName**: string (required) - The first name of the user.
+> - **lastName**: string (required) - The last name of the user.
+> - **email**: string (required) - The email address of the user.
+> - **password**: string (required) - The password for the user account.
+> - **confirmPassword**: string (required) - Confirmation of the password.
+
+This endpoint allows users to register a new account.
+
+#### Request Body Example:
+
+```json
+{
+    "firstName": "Mostafa",
+    "lastName": "Nasser",
+    "email": "mostafanasserx01@gmail.com",
+    "password": "123",
+    "confirmPassword": "123"
+}
+```
+
+### Response Example
+
+```json
+{
+    "status": "success",
+    "data": {
+        "user": {
+            "firstName": "Mostafa",
+            "lastName": "Nasser",
+            "email": "mostafanasserx01@gmail.com",
+            "password": "pass",
+            "_id": "66216bde3c4de560cdef98c2",
+            "__v": 0
+        }
+    }
+}
+```
+
+ 
+#### POST /api/v1/auth/register
+
+> ##### Request Body Props:
+>
+> - **firstName**: string (required) - The first name of the user.
+> - **lastName**: string (required) - The last name of the user.
+> - **email**: string (required) - The email address of the user.
+> - **password**: string (required) - The password for the user account.
+> - **confirmPassword**: string (required) - Confirmation of the password.
+
+This endpoint allows users to register a new account.
+
+#### Request Body Example:
+
+```json
+{
+    "firstName": "Mostafa",
+    "lastName": "Nasser",
+    "email": "mostafanasserx01@gmail.com",
+    "password": "123",
+    "confirmPassword": "123"
+}
+ ```
+### Response
+```json
+{
+    "status": "success",
+    "data": {
+        "user": {
+            "firstName": "Mostafa",
+            "lastName": "Nasser",
+            "email": "mostafanasserx01@gmail.com",
+            "password": "123",
+            "_id": "66216bde3c4de560cdef98c2",
+            "__v": 0
+        }
+    }
+}
+```
+The response includes a status indicating the success of the registration process and details about the registered user in the data object. Properties include:
+
+- **user**: Details of the registered user, including first name, last name, email, and user ID.
+- **_id**: The unique identifier of the user.
+- **__v**: Version key used by Mongoose for schema versioning.
 </details>
