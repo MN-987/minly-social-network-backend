@@ -1,5 +1,6 @@
 export const validation=(schema, considerHeaders = false) => {
     return (req, res, next) => {
+        console.log("req.file",req.file)
         let inputData = {...req.body, ...req.query, ...req.params}
        
         if(req.file || req.files){

@@ -9,14 +9,10 @@ import { upload } from "../config/multer.config";
 
 export const postUploadMedia = async (req: Request, res: Response, next) => {
   // for now It is user Id but it will be token based in future
+  console.log("req.file",req.file)
   const { uploaderUserId } = req.body;
-  console.log("req.file", req.file);  
 
-  if(req.file.mimetype=== 'video/mp4'){
-    console.log("video file")
-  }
-  
-  const uploadedMedia = await cloudinary.uploader.upload(req.file.path, {
+   const uploadedMedia = await cloudinary.uploader.upload(req.file.path, {
     resource_type: req.file.mimetype==='video/mp4' ? "video": "auto",
     upload_preset: "unsigned_upload",
     allowed_formats: ["png", "mp4", "jpeg", "jpg", "gif","heic"],
@@ -52,7 +48,7 @@ export const getAllMedia = async (req: Request, res: Response) => {
 //   const pageSize = parseInt(req.query.pageSize) || 3;
 //   console.log(   "page is" , page , "pageSize is" ,pageSize) 
 //   const media = await mediaService.getAllMedia(page, pageSize);
-  
+
 //   return res.status(200).json({ message: "All Media", data: media });
 // };
 
