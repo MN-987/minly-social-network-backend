@@ -3,12 +3,13 @@ import { Router } from "express";
 import { asyncHandler } from "../utils/errorHandling";
 import { postUploadMedia ,delDeleteMedia ,getAllMedia, postLikeMedia, postUnLikeMedia} from "../controllers/media.controllers";
 import {upload} from "../config/multer.config";
-
+import {postMediaValidator} from "../middlewares/validators/media.validators";
+import {validation} from "../middlewares/validators/validation";
 const router = Router();
 
 router.route("/")
 .get(asyncHandler(getAllMedia))
-.post(upload.single("file") ,asyncHandler(postUploadMedia))
+.post( upload.single("file"),asyncHandler(postUploadMedia))
 .delete(asyncHandler(delDeleteMedia));
 
 router.route("/like").post(asyncHandler(postLikeMedia));
