@@ -4,6 +4,8 @@
 ## Description
 
 This project is a TypeScript Node.js application designed to serve a post feed . The backend relies on MongoDB as its database to efficiently store and manage user-generated content. Key features include seamless image and video  upload, as well as the ability to like and unlike videos and images.
+<br>
+In this project, I've implemented a layered architecture where each layer is responsible for specific tasks and delegates the remaining work to the next layer. Additionally, I've incorporated Cloudinary as my cloud-based image and video management service.
 
 ## Table of Contents
 - [Installation](#installation)
