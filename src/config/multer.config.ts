@@ -11,7 +11,7 @@ export const upload = multer({
       cb(new Error("File does not support"), false);
       return;
     }
-    const maxSize = 5 * 1024 * 1024;
+    const maxSize:Number = 5 * 1024 * 1024;
     if (file.size > maxSize) {
       cb(new Error("File size exceeds the limit"), false);
       return;
