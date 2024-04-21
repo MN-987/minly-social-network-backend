@@ -11,10 +11,9 @@ In this project, I've implemented a layered architecture where each layer is res
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
+- [Environment Variables](#Environment-Variables)
 - [Folder Structure](#folder-structure)
 - [API Documentation](#api-documentation)
-- [Contribution](#contribution)
-- [License](#license)
 
 ## Installation
 Instructions for installing and setting up the project.
