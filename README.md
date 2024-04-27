@@ -224,6 +224,7 @@ This endpoint allows users to like a specific media item.
     }
 }
 ```
+
 The response includes a message indicating the success of the like action and details about the media item in the `data` object. Properties include:
 
 - **likes**: Information about likes for the media item.
@@ -235,22 +236,6 @@ The response includes a message indicating the success of the like action and de
 - **createdAt**: The timestamp indicating when the media item was created.
 - **__v**: Version key used by Mongoose for schema versioning.
 
-#### POST /api/v1/media/un-like
-
-> ##### Request Body Props:
->
-> - **mediaId**: string (required) - The ID of the media item to be unliked.
-> - **userId**: string (required) - The ID of the user unliking the media item.
-
-This endpoint allows users to unlike a previously liked media item.
-
-#### Request Body Example:
-
-```json
-{
-    "mediaId": "6614d3a34fefb6b4e0609ff3",
-    "userId": "6611719d19649772047095be"
-}
 
 #### POST /api/v1/media/un-like
 
@@ -268,8 +253,26 @@ This endpoint allows users to unlike a previously liked media item.
     "mediaId": "6614d3a34fefb6b4e0609ff3",
     "userId": "6611719d19649772047095be"
 }
+```
 
+#### POST /api/v1/media/un-like
 
+> ##### Request Body Props:
+>
+> - **mediaId**: string (required) - The ID of the media item to be unliked.
+> - **userId**: string (required) - The ID of the user unliking the media item.
+
+This endpoint allows users to unlike a previously liked media item.
+
+#### Request Body Example:
+
+```json
+{
+    "mediaId": "6614d3a34fefb6b4e0609ff3",
+    "userId": "6611719d19649772047095be"
+}
+
+```
 > Replace "mediaId" with the ID of the media item you want to unlike, and "userId" with the ID of the user performing the unlike action.
 
 #### Response Example
